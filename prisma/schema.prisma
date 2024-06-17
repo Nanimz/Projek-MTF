@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  user_id      Int      @id @default(autoincrement())
+  username     String   @unique
+  password     String
+  email        String   @unique
+  phone_number String?
+  tickets      Ticket[]
+  payments     Payment[]
+}
+
+model Event {
+  event_id    Int       @id @default(autoincrement())
+  event_name  String
+  description String?
+  date        DateTime
+  venue_id    Int
+  venue       Venue     @relation(fields: [venue_id], references: [venue_id])
+  tickets     Ticket[]
+}
+
+model Ticket {
+  ticket_id   Int     @id @default(autoincrement())
+  event_id    Int
+  user_id     Int
+  seat_number String?
+  price       Float
+  event       Event   @relation(fields: [event_id], references: [event_id], onDelete: Cascade)
+  user        User    @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+  payments    Payment[]
+}
+
+model Venue {
+  venue_id    Int     @id @default(autoincrement())
+  venue_name  String
+  address     String
+  city        String
+  events      Event[]
+}
+
+model Payment {
+  payment_id  Int     @id @default(autoincrement())
+  user_id     Int
+  ticket_id   Int
+  amount      Float
+  payment_date DateTime @default(now())
+  user        User    @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+  ticket      Ticket  @relation(fields: [ticket_id], references: [ticket_id], onDelete: Cascade)
+}
