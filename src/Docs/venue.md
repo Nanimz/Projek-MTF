@@ -41,7 +41,7 @@
   }
   ```
 
-#### Update Venue
+#### Update Venue by Id
 - **URL**: `/venues/:venue_id`
 - **Method**: `PUT`
 - **URL Parameters**:
@@ -64,7 +64,7 @@
   }
   ```
 
-#### Delete Venue
+#### Delete Venue by Id
 - **URL**: `/venues/:venue_id`
 - **Method**: `DELETE`
 - **URL Parameters**:
