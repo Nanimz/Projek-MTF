@@ -1,4 +1,4 @@
-import express from "express"; //Import express dari node_modules
+import express from "express"; //Import express dari node_modules di dalam folder
 import { userRouter } from "./Routes/user.route.js";
 import { venueRouter } from "./Routes/venue.route.js";
 import { eventRouter } from "./Routes/event.route.js";
